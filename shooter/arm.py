@@ -61,7 +61,7 @@ class RotateObj(pg.sprite.Sprite):
 
 class Arm(RotateObj):
     def __init__(self, pers):
-        super(Arm, self).__init__(pers, pg.image.load(r'imgs\arm.png'), l=60)
+        super(Arm, self).__init__(pers, pg.image.load(r'imgs\player\arm.png'), l=60)
 
     def update(self, x, y):
         self.rect.centerx = x
@@ -111,7 +111,6 @@ class Bullet(pg.sprite.Sprite):
 
 class Gun(RotateObj):
     def __init__(self, pers, l=80, self_len=None, speed=None):
-        super(Gun, self).__init__(pers, pg.image.load(r'imgs\pistol.png'), l=l)
         super(Gun, self).__init__(pers, pg.image.load(r'imgs\pistol.png'), l=l)
         if speed is None:
             self.speed = 0.1

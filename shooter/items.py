@@ -19,6 +19,7 @@ class Item(pg.sprite.Sprite):
             self.change_arm()
 
     def change_coords(self, dx, dy):
+        # print(self.rect.x, self.rect.y, 'it')
         self.rect.x += dx
         self.rect.y += dy
 

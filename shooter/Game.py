@@ -1,8 +1,11 @@
+import time
 from settings import *
 from player import Player
 from random import randrange as rnd
-from enemy import Enemy
+from enemy import Spawner, Enemy
 from items import *
+from tasker import *
+from map import *
 
 
 class App:
@@ -18,14 +21,22 @@ class App:
         self.items = pg.sprite.Group()
         self.mobs = []
         self.player = Player(self)
+        self.tasker = Tasker(self)
+        self.map = Map(self)
+        self.game_continue = True
 
     def setup(self):
         self.all_sprites = pg.sprite.Group()
         self.items = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
+        self.mobs = []
         self.mobs += [Enemy(self)]
         self.player = Player(self)
+        self.tasker = Tasker(self)
         GunItem(self, WIDTH // 20, HEIGHT // 2)
+        Spawner(self, WIDTH // 2 + 900, HEIGHT // 2)
+        self.map = Map(self)
+        self.game_continue = True
 
     def draw(self):
         self.screen.fill((60, 150, 10))
@@ -54,9 +65,17 @@ class App:
 
     def run(self):
         self.setup()
-        while True:
+        while self.game_continue:
             self.update()
             self.draw()
+        self.end()
+
+    def end(self):
+        self.screen.fill('black')
+        self.update()
+        time.sleep(5)
+        self.setup()
+        self.run()
 
 
 if __name__ == '__main__':
