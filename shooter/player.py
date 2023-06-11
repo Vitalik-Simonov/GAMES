@@ -14,7 +14,7 @@ class Player(pg.sprite.Group):
         self.arm = Arm(self)
         self.speedx = 0
         self.speedy = 0
-        self.lives = 5
+        self.lives = LIVES
 
     def update(self):
         if pg.key.get_pressed()[pg.K_RIGHT] or pg.key.get_pressed()[pg.K_d]:

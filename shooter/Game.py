@@ -6,6 +6,8 @@ from enemy import Spawner, Enemy
 from items import *
 from tasker import *
 from map import *
+from score import *
+from ui import *
 
 
 class App:
@@ -35,6 +37,8 @@ class App:
         self.tasker = Tasker(self)
         GunItem(self, WIDTH // 20, HEIGHT // 2)
         Spawner(self, WIDTH // 2 + 900, HEIGHT // 2)
+        HP(self)
+        Pause(self)
         self.map = Map(self)
         self.game_continue = True
 
