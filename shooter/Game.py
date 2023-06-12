@@ -16,20 +16,21 @@ class App:
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         pg.init()
-        pg.mixer.music.load('sounds/bg.mp3')
-        pg.mixer.music.play(loops=-1)
         self.screen = pg.display.set_mode([WIDTH, HEIGHT])
         self.clock = pg.time.Clock()
-        self.all_sprites = pg.sprite.Group()
-        self.bullets = pg.sprite.Group()
-        self.items = pg.sprite.Group()
-        self.mobs = []
-        self.player = Player(self)
-        self.tasker = Tasker(self)
-        self.map = Map(self)
-        self.game_continue = True
+        # self.all_sprites = pg.sprite.Group()
+        # self.bullets = pg.sprite.Group()
+        # self.items = pg.sprite.Group()
+        # self.mobs = []
+        # self.player = Player(self)
+        # self.tasker = Tasker(self)
+        # self.map = Map(self)
+        # self.game_continue = True
 
     def setup(self):
+        pg.mixer.music.load('sounds/bg.mp3')
+        pg.mixer.music.play(loops=-1)
+        pg.mixer.music.set_volume(0.5)
         self.all_sprites = pg.sprite.Group()
         self.items = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
@@ -38,9 +39,11 @@ class App:
         self.player = Player(self)
         self.tasker = Tasker(self)
         GunItem(self, WIDTH // 20, HEIGHT // 2)
+        Star(self, WIDTH // 2, HEIGHT // 20)
         Spawner(self, WIDTH // 2 + 900, HEIGHT // 2)
         HP(self)
         Pause(self)
+        Bag(self)
         self.map = Map(self)
         self.game_continue = True
 

@@ -33,3 +33,13 @@ class GunItem(Item):
 
     def change_arm(self):
         self.game.player.arm = arm.Gun(self.game.player)
+
+
+class Star(Item):
+    def __init__(self, game, x, y):
+        super(Star, self).__init__(game, x, y, pg.image.load(r'imgs\star.png'))
+
+    def change_arm(self):
+        k = self.game.player.inventory.list[0].size / max(self.image.get_width(), self.image.get_height()) * 0.75
+        im = pg.transform.scale(self.image, (self.image.get_width() * k, self.image.get_height() * k)).copy()
+        self.game.player.inventory.put(Star, im)

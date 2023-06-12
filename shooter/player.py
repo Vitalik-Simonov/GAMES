@@ -1,5 +1,6 @@
 from settings import *
 from arm import *
+from ui import *
 
 
 class Player(pg.sprite.Group):
@@ -15,6 +16,7 @@ class Player(pg.sprite.Group):
         self.speedx = 0
         self.speedy = 0
         self.lives = LIVES
+        self.inventory = Inventory(self.game)
 
     def update(self):
         if pg.key.get_pressed()[pg.K_RIGHT] or pg.key.get_pressed()[pg.K_d]:
