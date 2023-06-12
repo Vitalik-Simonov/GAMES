@@ -16,6 +16,8 @@ class App:
         self.WIDTH = WIDTH
         self.HEIGHT = HEIGHT
         pg.init()
+        pg.mixer.music.load('sounds/bg.mp3')
+        pg.mixer.music.play(loops=-1)
         self.screen = pg.display.set_mode([WIDTH, HEIGHT])
         self.clock = pg.time.Clock()
         self.all_sprites = pg.sprite.Group()
