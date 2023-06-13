@@ -133,7 +133,7 @@ class EnemyStrike(pg.sprite.Group):
         self.lives = 3
         self.dist = 600
         self.shoot_speed = 1
-        self.timer = now()
+        self.timer = now() + self.shoot_speed
         self.angle = 0
 
     def update(self):
@@ -192,8 +192,8 @@ class EnemyBullet(pg.sprite.Sprite):
         self.image = pg.Surface((0, 0))
 
         self.i = 0
-        self.bullet_speed = 15
-        self.lenght = 1200
+        self.bullet_speed = 7
+        self.lenght = 600
 
     def check(self):
         if pg.sprite.spritecollideany(self, self.game.player):

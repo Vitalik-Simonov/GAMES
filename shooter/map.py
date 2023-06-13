@@ -1,4 +1,5 @@
 from settings import *
+from enemy import Spawner
 
 
 class Map(pg.sprite.Sprite):
@@ -28,3 +29,9 @@ class Map(pg.sprite.Sprite):
                  self.game.tasker.rect.y - self.game.player.y
         pg.draw.circle(self.image, 'blue', (dx // MAP_SIZE,
                                             dy // MAP_SIZE), self.r)
+
+        for spawner in self.game.all_sprites:
+            if type(spawner) == Spawner:
+                dx, dy = self.game.player.virtx + spawner.rect.x - self.game.player.x, \
+                         self.game.player.virty + spawner.rect.y - self.game.player.y
+                pg.draw.circle(self.image, 'darkred', (dx // MAP_SIZE, dy // MAP_SIZE), self.r)

@@ -36,14 +36,34 @@ class GunItem(Item):
         self.game.player.arm = arm.Gun(self.game.player)
 
 
-class Star(Item):
+class Gear(Item):
     def __init__(self, game, x, y):
-        super(Star, self).__init__(game, x, y, pg.image.load(r'imgs\star.png'))
+        super(Gear, self).__init__(game, x, y, pg.image.load(r'imgs\gear.png'))
 
     def change_arm(self):
         k = self.game.player.inventory.list[0].size / max(self.image.get_width(), self.image.get_height()) * 0.75
         im = pg.transform.scale(self.image, (self.image.get_width() * k, self.image.get_height() * k)).copy()
-        self.game.player.inventory.put(Star, im)
+        self.game.player.inventory.put(Gear, im)
+
+
+class Engine(Item):
+    def __init__(self, game, x, y):
+        super(Engine, self).__init__(game, x, y, pg.image.load(r'imgs\engine.png'))
+
+    def change_arm(self):
+        k = self.game.player.inventory.list[0].size / max(self.image.get_width(), self.image.get_height()) * 0.75
+        im = pg.transform.scale(self.image, (self.image.get_width() * k, self.image.get_height() * k)).copy()
+        self.game.player.inventory.put(Engine, im)
+
+
+class Fuel(Item):
+    def __init__(self, game, x, y):
+        super(Fuel, self).__init__(game, x, y, pg.image.load(r'imgs\fuel.png'))
+
+    def change_arm(self):
+        k = self.game.player.inventory.list[0].size / max(self.image.get_width(), self.image.get_height()) * 0.75
+        im = pg.transform.scale(self.image, (self.image.get_width() * k, self.image.get_height() * k)).copy()
+        self.game.player.inventory.put(Fuel, im)
 
 
 class Decoration(pg.sprite.Sprite):

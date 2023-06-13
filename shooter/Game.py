@@ -37,12 +37,18 @@ class App:
         self.items = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.mobs = []
-        self.mobs += [Enemy(self)]
         self.player = Player(self)
         self.tasker = Tasker(self)
         GunItem(self, WIDTH // 20, HEIGHT // 2)
-        Star(self, WIDTH // 2, HEIGHT // 20)
         Spawner(self, WIDTH // 2 + 900, HEIGHT // 2)
+        Spawner(self, WIDTH // 2 - 1000, HEIGHT // 2)
+        Spawner(self, WIDTH // 2, HEIGHT // 2 + 900)
+        Spawner(self, WIDTH // 2, HEIGHT // 2 - 900)
+
+        Spawner(self, -FIELD_WIDHT // 4 + 200, -FIELD_HEIGHT // 20 + 200)
+        Spawner(self, FIELD_WIDHT // 4 + 300, FIELD_HEIGHT // 2.2 - 100)
+        Spawner(self, FIELD_WIDHT // 4 + 100, -FIELD_HEIGHT // 4 + 100)
+
         HP(self)
         Pause(self)
         Bag(self)
@@ -88,6 +94,12 @@ class App:
     def end(self):
         self.screen.fill('black')
         self.update()
+        time.sleep(5)
+        self.run()
+
+    def happy_end(self):
+        self.screen.fill('red')
+        pg.display.flip()
         time.sleep(5)
         self.run()
 

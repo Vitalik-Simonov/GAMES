@@ -1,4 +1,5 @@
 from settings import *
+from math import sqrt
 
 
 class Button(pg.sprite.Sprite):
@@ -260,3 +261,52 @@ class StartMenu:
             pg.mixer.music.set_volume(self.slider.value)
             pg.display.flip()
             self.game.clock.tick(self.game.FPS)
+
+
+class Dialog(pg.sprite.Sprite):
+    def __init__(self, tasker, game, texts):
+        super(Dialog, self).__init__(game.all_sprites, game.ui)
+        self.game = game
+        self.image = pg.surface.Surface((WIDTH // 1.5, 300))
+        self.rect = self.image.get_rect()
+        self.rect.centerx = WIDTH // 2
+        self.rect.y = HEIGHT - 300
+        self.texts = texts
+        self.is_pressed = True
+        self.n = 0
+        self.font = pg.font.SysFont('Calibri.ttf', 40)
+        self.tasker = tasker
+
+    def update(self):
+        target_x, target_y = self.game.player.x, self.game.player.y
+        if sqrt((self.tasker.rect.y - target_y) ** 2 + (self.tasker.rect.x - target_x) ** 2) > self.tasker.dist:
+            self.tasker.dialog_continue = False
+            self.kill()
+        self.image.fill((196, 98, 0))
+        for i, text in enumerate(self.texts[self.n].split('\n')):
+            self.image.blit(self.font.render(text, True, 'black'), (0, 55 * i))
+
+        if not pg.mouse.get_pressed(3)[0]:
+            self.is_pressed = True
+        if pg.mouse.get_pressed(3)[0] and self.pressed() and self.is_pressed:
+            self.is_pressed = False
+            self.n += 1
+            if self.n == len(self.texts):
+                self.tasker.dialog_continue = False
+                self.kill()
+
+    def pressed(self):
+        mouse = pg.mouse.get_pos()
+        if mouse[0] >= self.rect.topleft[0]:
+            if mouse[1] >= self.rect.topleft[1]:
+                if mouse[0] <= self.rect.bottomright[0]:
+                    if mouse[1] <= self.rect.bottomright[1]:
+                        return True
+                    else:
+                        return False
+                else:
+                    return False
+            else:
+                return False
+        else:
+            return False
