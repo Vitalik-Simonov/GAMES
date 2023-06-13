@@ -28,11 +28,11 @@ class HP(pg.sprite.Sprite):
                 self.image.blit(self.im2, self.heart_rect)
         else:
             for i in range(self.game.player.lives):
-                self.heart_rect.x = (15 + self.im1.get_size()[0]) * i
+                self.heart_rect.x = (15 + self.im1.get_size()[0]) * (i % 5)
                 self.heart_rect.y = (15 + self.im1.get_size()[1]) * (i // 5)
                 self.image.blit(self.im1, self.heart_rect)
             for i in range(self.game.player.lives, LIVES):
-                self.heart_rect.x = (15 + self.im2.get_size()[0]) * i
+                self.heart_rect.x = (15 + self.im2.get_size()[0]) * (i % 5)
                 self.heart_rect.y = (15 + self.im2.get_size()[1]) * (i // 5)
                 self.image.blit(self.im2, self.heart_rect)
         self.image.set_colorkey(BG_OUT)

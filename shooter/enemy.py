@@ -133,7 +133,7 @@ class EnemyStrike(pg.sprite.Group):
         self.lives = 3
         self.dist = 600
         self.shoot_speed = 1
-        self.timer = now() + self.shoot_speed
+        self.timer = now() + self.shoot_speed * 1.5
         self.angle = 0
 
     def update(self):

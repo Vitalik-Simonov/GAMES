@@ -16,7 +16,7 @@ FIELD_HEIGHT = HEIGHT * 3
 MAP_SIZE = 20
 START_POS_X = FIELD_WIDHT // 2
 START_POS_Y = FIELD_HEIGHT // 2
-LIVES = 5
+LIVES = 10
 INVENTORY_LEN = 6
 DIALOGS = {
     'start': ['''Привет! Я бортовой компьютер Олег. Я могу помочь отремонтировать ракету,
