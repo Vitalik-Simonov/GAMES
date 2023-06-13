@@ -3,7 +3,7 @@ from settings import *
 
 class Map(pg.sprite.Sprite):
     def __init__(self, game):
-        super(Map, self).__init__(game.all_sprites)
+        super(Map, self).__init__(game.all_sprites, game.ui)
         self.image = pg.surface.Surface((FIELD_WIDHT // MAP_SIZE, FIELD_HEIGHT // MAP_SIZE))
         self.rect = self.image.get_rect()
         self.rect.x = WIDTH - FIELD_WIDHT // MAP_SIZE

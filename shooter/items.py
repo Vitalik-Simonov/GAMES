@@ -1,5 +1,6 @@
 from settings import *
 import arm
+from random import randrange as rnd, choice
 
 
 class Item(pg.sprite.Sprite):
@@ -43,3 +44,34 @@ class Star(Item):
         k = self.game.player.inventory.list[0].size / max(self.image.get_width(), self.image.get_height()) * 0.75
         im = pg.transform.scale(self.image, (self.image.get_width() * k, self.image.get_height() * k)).copy()
         self.game.player.inventory.put(Star, im)
+
+
+class Decoration(pg.sprite.Sprite):
+    def __init__(self, game, x=None, y=None, typed=None):
+        super(Decoration, self).__init__(game.all_sprites)
+        if typed is None:
+            typed = choice(['rock', 'grass', 'bush', 'rock2'])
+        self.game = game
+        self.image = pg.image.load('imgs/' + typed + '.png')
+        self.image.set_colorkey(BG_OUT)
+        self.rect = self.image.get_rect()
+        if x is None:
+            for i in range(10):
+                x = rnd(-FIELD_WIDHT // 2, FIELD_WIDHT // 2)
+                if not pg.sprite.spritecollideany(self, game.all_sprites):
+                    break
+        if y is None:
+            for i in range(10):
+                y = rnd(-FIELD_HEIGHT // 2, FIELD_HEIGHT // 2)
+                if not pg.sprite.spritecollideany(self, game.all_sprites):
+                    break
+        self.rect.x = x
+        self.rect.y = y
+
+    def update(self):
+        pass
+
+    def change_coords(self, dx, dy):
+        # print(self.rect.x, self.rect.y, 'it')
+        self.rect.x += dx
+        self.rect.y += dy

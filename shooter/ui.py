@@ -151,7 +151,7 @@ class Slider(pg.sprite.Sprite):
 
 class Bag(Button):
     def __init__(self, game):
-        super(Bag, self).__init__(game, pg.image.load('imgs/bag.png'), 400, 10, game.all_sprites)
+        super(Bag, self).__init__(game, pg.image.load('imgs/bag.png'), 400, 10, game.all_sprites, game.ui)
         self.game = game
         self.is_pressed = True
 
@@ -166,7 +166,7 @@ class Bag(Button):
 class Cell(Button):
     def __init__(self, game, i):
         self.im = pg.image.load('imgs/cell.png')
-        super(Cell, self).__init__(game, pg.surface.Surface((0, 0)), 500 + 70 * i, 10, game.all_sprites)
+        super(Cell, self).__init__(game, pg.surface.Surface((0, 0)), 500 + 70 * i, 10, game.all_sprites, game.ui)
         self.is_active = False
         self.game = game
         self.i = i

@@ -33,6 +33,7 @@ class App:
         pg.mixer.music.set_volume(0.5)
         self.sound_on = True
         self.all_sprites = pg.sprite.Group()
+        self.ui = pg.sprite.Group()
         self.items = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
         self.mobs = []
@@ -48,11 +49,13 @@ class App:
         SoundOnOff(self)
         self.map = Map(self)
         self.game_continue = True
+        for i in range(90):
+            Decoration(self)
 
     def draw(self):
         self.screen.fill((60, 150, 10))
         self.all_sprites.draw(self.screen)
-        # self.bullets.draw(self.screen)
+        self.ui.draw(self.screen)
         # self.items.draw(self.screen)
         [mob.draw(self.screen) for mob in self.mobs]
         self.player.draw(self.screen)
@@ -66,7 +69,7 @@ class App:
     def update(self):
         self.check_events()
         self.all_sprites.update()
-        # self.bullets.update()
+        self.ui.update()
         # self.items.update()
         [mob.update() for mob in self.mobs]
         self.player.update()

@@ -3,7 +3,7 @@ from settings import *
 
 class HP(pg.sprite.Sprite):
     def __init__(self, game):
-        super(HP, self).__init__(game.all_sprites)
+        super(HP, self).__init__(game.all_sprites, game.ui)
         self.game = game
         self.im1 = pg.image.load('imgs/heart.png')
         self.im2 = pg.image.load('imgs/unheart.png')
