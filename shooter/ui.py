@@ -41,6 +41,36 @@ class Pause(Button):
             # pg.mixer.music.unpause()
 
 
+class SoundOnOff(Button):
+    def __init__(self, game):
+        super(SoundOnOff, self).__init__(game, pg.image.load('imgs/sound_off.png'), 15, 75, game.all_sprites)
+        self.game = game
+        self.volume = pg.mixer.music.get_volume()
+        self.is_pressed = True
+
+    def update(self):
+        if self.game.sound_on:
+            self.volume = pg.mixer.music.get_volume()
+        if not pg.mouse.get_pressed(3)[0]:
+            self.is_pressed = True
+        if pg.mouse.get_pressed(3)[0] and self.pressed() and self.is_pressed:
+            self.is_pressed = False
+            if self.game.sound_on:
+                self.game.sound_on = False
+                pg.mixer.music.set_volume(0.0)
+                PLAYER_DAMAGE_SOUND.set_volume(0.0)
+                ENEMY_DAMAGE_SOUND.set_volume(0.0)
+                self.image = pg.image.load('imgs/sound_on.png')
+            else:
+                self.game.sound_on = True
+                pg.mixer.music.set_volume(self.volume)
+                PLAYER_DAMAGE_SOUND.set_volume(self.volume)
+                ENEMY_DAMAGE_SOUND.set_volume(self.volume)
+                self.image = pg.image.load('imgs/sound_off.png')
+            self.image.set_colorkey(BG_OUT)
+
+
+
 class Play(Button):
     def __init__(self, game):
         super(Play, self).__init__(game, pg.image.load('imgs/play.png'), 500, 450)
@@ -69,7 +99,8 @@ class PauseMenu:
             self.game.screen.fill((60, 10, 150))
             self.check_events()
             self.game.screen.blit(self.play.image, self.play.rect)
-            self.slider.update()
+            if self.game.sound_on:
+                self.slider.update()
             self.game.screen.blit(self.slider.image, self.slider.rect)
             if self.play.update():
                 del self.play

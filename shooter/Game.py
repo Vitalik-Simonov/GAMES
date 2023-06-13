@@ -31,6 +31,7 @@ class App:
         pg.mixer.music.load('sounds/bg.mp3')
         pg.mixer.music.play(loops=-1)
         pg.mixer.music.set_volume(0.5)
+        self.sound_on = True
         self.all_sprites = pg.sprite.Group()
         self.items = pg.sprite.Group()
         self.bullets = pg.sprite.Group()
@@ -44,6 +45,7 @@ class App:
         HP(self)
         Pause(self)
         Bag(self)
+        SoundOnOff(self)
         self.map = Map(self)
         self.game_continue = True
 
