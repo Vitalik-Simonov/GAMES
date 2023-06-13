@@ -70,7 +70,6 @@ class SoundOnOff(Button):
             self.image.set_colorkey(BG_OUT)
 
 
-
 class Play(Button):
     def __init__(self, game):
         super(Play, self).__init__(game, pg.image.load('imgs/play.png'), 500, 450)
@@ -179,8 +178,6 @@ class Cell(Button):
         if self.is_active:
             self.image = self.im.copy()
             rect = self.item_image.get_rect()
-            if self.i == 0:
-                print(self.item_image.get_size())
             rect.centerx = self.image.get_width() // 2
             rect.centery = self.image.get_height() // 2
             self.image.blit(self.item_image, rect)
@@ -222,3 +219,44 @@ class Inventory(pg.sprite.Sprite):
                 cell.item = item
                 cell.item_image = im.copy()
                 break
+
+
+class Start(Button):
+    def __init__(self, game):
+        im = pg.image.load('imgs/play.png')
+        super(Start, self).__init__(game, im, WIDTH // 2 - im.get_width() // 2, HEIGHT // 2 - im.get_height() // 2)
+        self.game = game
+
+    def update(self):
+        if pg.mouse.get_pressed(3)[0] and self.pressed():
+            return True
+
+
+class StartMenu:
+    def __init__(self, game):
+        self.game = game
+        self.play = Start(self.game)
+        self.slider = Slider(self.game, 'black', 'red', 1100, 700, 450, 100, pg.mixer.music.get_volume())
+        self.run()
+
+    def check_events(self):
+        for event in pg.event.get():
+            if event.type == pg.QUIT:
+                pg.quit()
+                exit()
+
+    def run(self):
+        while True:
+            self.game.screen.fill((60, 10, 150))
+            self.check_events()
+            self.game.screen.blit(pg.image.load('imgs/bg_start.png'), (0, 0))
+            self.game.screen.blit(self.play.image, self.play.rect)
+            if self.game.sound_on:
+                self.slider.update()
+            self.game.screen.blit(self.slider.image, self.slider.rect)
+            if self.play.update():
+                del self.play
+                break
+            pg.mixer.music.set_volume(self.slider.value)
+            pg.display.flip()
+            self.game.clock.tick(self.game.FPS)

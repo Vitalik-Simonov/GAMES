@@ -76,6 +76,7 @@ class App:
 
     def run(self):
         self.setup()
+        StartMenu(self)
         while self.game_continue:
             self.update()
             self.draw()
@@ -85,7 +86,6 @@ class App:
         self.screen.fill('black')
         self.update()
         time.sleep(5)
-        self.setup()
         self.run()
 
 
