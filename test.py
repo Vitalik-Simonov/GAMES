@@ -1,2 +1,6 @@
-import taichi_glsl as ts
-from taichi_glsl import vec2, vec3
+try:
+    import pygame as pg
+except Exception as e:
+    with open('www.txt', 'w') as f:
+        f.write(str(e))
+input()
