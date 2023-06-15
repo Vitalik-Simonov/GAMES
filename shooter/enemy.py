@@ -68,17 +68,40 @@ class Body(pg.sprite.Sprite):
     def __init__(self, pers):
         super(Body, self).__init__(pers)
         self.image = pg.image.load(r'imgs\enemy\enemy.png')
+        self.pers = pers
+        self.orig_im = self.image.copy()
         self.image.set_colorkey(BG_OUT)
         self.rect = self.image.get_rect()
 
     def update(self, x, y):
+        self.image = pg.transform.rotate(self.orig_im, 90 - self.pers.arm.angle)
+        self.image.set_colorkey(BG_OUT)
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.rect.y = y
+
+
+class BodyStrike(pg.sprite.Sprite):
+    def __init__(self, pers):
+        super(BodyStrike, self).__init__(pers)
+        self.image = pg.image.load(r'imgs\enemy\enemy_strike.png')
+        self.pers = pers
+        self.orig_im = self.image.copy()
+        self.image.set_colorkey(BG_OUT)
+        self.rect = self.image.get_rect()
+
+    def update(self, x, y):
+        self.image = pg.transform.rotate(self.orig_im, 90 - self.pers.arm.angle)
+        self.image.set_colorkey(BG_OUT)
+        self.rect = self.image.get_rect()
         self.rect.x = x
         self.rect.y = y
 
 
 class Arm(RotateObj):
     def __init__(self, pers):
-        super(Arm, self).__init__(pers, pg.image.load(r'imgs\enemy\arm.png'), l=60)
+        # super(Arm, self).__init__(pers, pg.image.load(r'imgs\enemy\arm.png'), l=60)
+        super(Arm, self).__init__(pers, pg.surface.Surface((0, 0)), l=60)
         self.pers = pers
 
     def update(self, x, y):
@@ -127,7 +150,7 @@ class EnemyStrike(pg.sprite.Group):
         if y is None:
             self.y = rnd(HEIGHT)
         self.game = game
-        self.body = Body(self)
+        self.body = BodyStrike(self)
         self.arm = Arm(self)
         self.speed = 3
         self.lives = 3
