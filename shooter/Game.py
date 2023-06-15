@@ -138,6 +138,7 @@ class App:
         for i in range(800, 100, -15):
             self.screen.blit(pg.transform.scale(orig_im, (w * i / 199, h * i / 199)), (400 - i * 4, 200 - i * 2))
             pg.display.flip()
+        time.sleep(1)
         self.run()
 
     def happy_end(self):

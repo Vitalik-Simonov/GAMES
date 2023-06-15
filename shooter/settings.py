@@ -27,4 +27,4 @@ DIALOGS = {
 а значит тебя ждут новые приключения'''],
     'fuel': ['Отлично, теперь у нас полный бак. Готовься к полёту!']
 }
-SLIDES = ['imgs/slide_1.png', 'imgs/slide_2.png', 'imgs/slide_3.png']
+SLIDES = ['imgs/slide_1.png', 'imgs/slide_2.png']
