@@ -70,7 +70,7 @@ class Decoration(pg.sprite.Sprite):
     def __init__(self, game, x=None, y=None, typed=None):
         super(Decoration, self).__init__(game.all_sprites)
         if typed is None:
-            typed = choice(['rock', 'grass', 'bush', 'rock2'])
+            typed = choice(['rock', 'grass', 'bush', 'rock2', 'tree'])
         self.game = game
         self.image = pg.image.load('imgs/' + typed + '.png')
         self.image.set_colorkey(BG_OUT)

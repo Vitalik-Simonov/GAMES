@@ -202,7 +202,7 @@ class Inventory(pg.sprite.Sprite):
         self.game = game
         self.image = pg.surface.Surface((0, 0))
         self.rect = self.image.get_rect()
-        self.is_active = False
+        self.is_active = True
         self.full = False
         self.list = [Cell(game, i) for i in range(INVENTORY_LEN)]
 
